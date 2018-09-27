@@ -6,6 +6,7 @@ Based on Keith Peter's Solution in
 "Foundation Actionscript Animation: Making Things Move!".
 """
 from ball import Ball
+import csv
 add_library('video')
 
 numBalls = 2
@@ -20,14 +21,14 @@ HEIGHT = 1520
 
 MODE = 1
 
-
+videoFilename = "test.mp4"
 
 def setup():
     size(int(WIDTH*0.4), int(HEIGHT*0.4) + 100)
     background(0)
     frameRate(10)
     global movie
-    movie = Movie(this, "test.mp4")
+    movie = Movie(this, videoFilename)
     movie.pause()
     movie.loop()
     
@@ -51,8 +52,7 @@ def draw():
         movie.pause()
     else: 
         movie.play()
-        for ball in balls:
-            data.append([ball.ID, (ball.position.x ,ball.position.y), ball.angle, ball.talking])
+        data.append([[ball.ID, (ball.position.x ,ball.position.y), ball.angle, ball.talking] for ball in balls])
     
     for ball in balls:
         ball.updateTri()
@@ -82,7 +82,10 @@ def keyPressed():
         balls[curBall].talking = not balls[curBall].talking
         
     if key == 'q':
-        print data
+        with open('tracking_data_' + videoFilename.split(".")[0] + '.csv', 'w') as csvfile:
+            writer = csv.writer(csvfile)
+            for t in data: 
+                writer.writerow(t)
             
     if (key == CODED):
         if (keyCode == RIGHT) and curBall >= 0:
