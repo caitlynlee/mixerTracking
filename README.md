@@ -10,8 +10,8 @@ https://processing.org/download/
 Video files (assuming .mp4 format) must be placed in the "data" directory, inside the "tracking" directory.
 
 Click to add individuals, once an individual is added, click the circle to toggle that individual (they will change from white to red). While an individual is selected:  
-- use the left/right arrow keys to change the shoulder angle.
-- Drag to move position.
+- use the left/right arrow keys to change the shoulder angle and drag to move position.
+- **FULL KEYBOARD CONTROLS**: i/j/k/l keys to move dot/triangle up/left/down/right and a/d keys to rotate. 
 - 't' to toggle whether individual is speaking or not.
 - type in custom subject ID and press Enter to save. (Pressing 'h' to hide the video will show subject IDs to confirm custom ID was added/saved)
 - Backspace to delete the triangle
