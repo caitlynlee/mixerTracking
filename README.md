@@ -1,6 +1,11 @@
 # mixerTracking
 GUI made to track individuals in a party, built using processing, python mode.
 
+### Before use
+Processing 3 must be downloaded and installed before using this program. You can download processing here:
+https://processing.org/download/
+
+
 ### Usage
 Video files (assuming .mp4 format) must be placed in the "data" directory, inside the "tracking" directory.
 
