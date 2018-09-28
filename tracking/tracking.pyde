@@ -124,16 +124,16 @@ def keyPressed():
             balls[curBall].moveDir('down')
             
         if key == 'a':
-            balls[curBall].rotateLeft()
-        if key == 'd':
             balls[curBall].rotateRight()
+        if key == 'd':
+            balls[curBall].rotateLeft()
             
     if (key == CODED):
         if (keyCode == RIGHT) and curBall >= 0:
-            balls[curBall].rotateRight()
+            balls[curBall].roateLeft()
             
         if (keyCode == LEFT) and curBall >= 0:
-            balls[curBall].rotateLeft()
+            balls[curBall].rotateRight()
             
         if (keyCode == DOWN):
             movie.jump(movie.time()-10)
