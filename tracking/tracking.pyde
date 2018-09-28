@@ -21,7 +21,10 @@ HEIGHT = 1520
 
 MODE = 1
 
+subID = ""
+
 videoFilename = "test.mp4"
+showingText = True
 
 def setup():
     size(int(WIDTH*0.4), int(HEIGHT*0.4) + 100)
@@ -41,10 +44,17 @@ def movieEvent(m):
     m.read()
 
 def draw(): 
+    global showingText
     if MODE == 1: 
         image(movie, 0,0,width,height - 100)
     if MODE == 0:
         background(0)
+        if not showingText: 
+            text("Click to add triangles, click on circle in triangle to toggle individual", 0, height - 80)
+            text("While individual selected: Use left/right arrow keys to change angle of triangle, 't' to toggle talking status", 0, height - 60)
+            text("Spacebar to pause video, 'h' to toggle show/hide video, as well as triangle IDs", 0, height - 40)
+            text("Down arrow key to go back 10 seconds, 'q' to export data to csv", 0, height - 20)
+            showingText = True
         for ball in balls:
             ball.displayID()
         
@@ -52,7 +62,9 @@ def draw():
         movie.pause()
     else: 
         movie.play()
-        data.append([[ball.ID, (ball.position.x ,ball.position.y), ball.angle, ball.talking] for ball in balls])
+        dataRow = [movie.time()]
+        dataRow.append([[ball.ID, (ball.position.x ,ball.position.y), ball.angle, ball.talking] for ball in balls])
+        data.append(dataRow)
     
     for ball in balls:
         ball.updateTri()
@@ -62,13 +74,21 @@ def draw():
     stroke(255)
     line(0, height-100, width, height-100)
     fill(255)
-    #text("Currently tracking: ", 0, height - 60)
-    
     
 def keyPressed():
     global paused
     global movie
     global MODE
+    global showingText
+    global subID
+    
+    if isNum(key):
+        subID += key
+        
+    if key == ENTER and curBall >= 0:
+        balls[curBall].setID(int(subID))
+        subID = ""
+        
     if key == ' ':
         if not paused: 
             paused = True
@@ -76,6 +96,7 @@ def keyPressed():
             paused = False
             
     if key == 'h':
+        showingText = False
         MODE = abs(MODE-1)
         
     if key == 't':
@@ -86,6 +107,9 @@ def keyPressed():
             writer = csv.writer(csvfile)
             for t in data: 
                 writer.writerow(t)
+    
+    if key == BACKSPACE and curBall >=0: 
+        del balls[curBall]
             
     if (key == CODED):
         if (keyCode == RIGHT) and curBall >= 0:
@@ -97,7 +121,12 @@ def keyPressed():
         if (keyCode == DOWN):
             movie.jump(movie.time()-10)
             del data[-100:]
-        
+
+def isNum(button):
+    nums = [str(x) for x in range(10)]
+    if button in nums: return True
+    else: return False
+    
 def mouseClicked():
     global curBall
     for i in range(len(balls)): 

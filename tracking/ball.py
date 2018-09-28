@@ -24,6 +24,9 @@ class Ball(object):
                  self.position.x + r1 * cos(self.angle), self.position.y + r1 * sin(self.angle),
                  self.position.x + r2 * cos(self.angle + PI/2), self.position.y + r2 * sin(self.angle + PI/2))
     
+    def setID(self, newID):
+        self.ID = newID
+    
     def rotateRight(self):
         self.angle -= PI/20
         self.updateTri()
