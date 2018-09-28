@@ -2,6 +2,7 @@ from random import randint, random
 
 r1=25
 r2=10
+STEP = 4
 
 class Ball(object):
 
@@ -36,10 +37,11 @@ class Ball(object):
         self.updateTri()
         
     def moveDir(self, dir): 
-        if dir == 'up': self.position -= PVector(0,2)
-        if dir == 'down': self.position += PVector(0,2)
-        if dir == 'left': self.position -= PVector(2,0)
-        if dir == 'right': self.position += PVector(2,0)
+        global STEP
+        if dir == 'up': self.position -= PVector(0,STEP)
+        if dir == 'down': self.position += PVector(0,STEP)
+        if dir == 'left': self.position -= PVector(STEP,0)
+        if dir == 'right': self.position += PVector(STEP,0)
         
     def updatePos(self, newX, newY):
         self.position = PVector(newX, newY)
