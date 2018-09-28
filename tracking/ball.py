@@ -35,6 +35,12 @@ class Ball(object):
         self.angle += PI/20
         self.updateTri()
         
+    def moveDir(self, dir): 
+        if dir == 'up': self.position -= PVector(0,2)
+        if dir == 'down': self.position += PVector(0,2)
+        if dir == 'left': self.position -= PVector(2,0)
+        if dir == 'right': self.position += PVector(2,0)
+        
     def updatePos(self, newX, newY):
         self.position = PVector(newX, newY)
         

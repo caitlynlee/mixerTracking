@@ -81,6 +81,7 @@ def keyPressed():
     global MODE
     global showingText
     global subID
+    global curBall
     
     if isNum(key):
         subID += key
@@ -99,7 +100,7 @@ def keyPressed():
         showingText = False
         MODE = abs(MODE-1)
         
-    if key == 't':
+    if key == 't' and curBall >= 0:
         balls[curBall].talking = not balls[curBall].talking
         
     if key == 'q':
@@ -110,6 +111,22 @@ def keyPressed():
     
     if key == BACKSPACE and curBall >=0: 
         del balls[curBall]
+        curBall = -1
+        
+    if curBall >= 0:
+        if key == 'l':
+            balls[curBall].moveDir('right')
+        if key == 'i':
+            balls[curBall].moveDir('up')
+        if key == 'j':
+            balls[curBall].moveDir('left')
+        if key == 'k':
+            balls[curBall].moveDir('down')
+            
+        if key == 'a':
+            balls[curBall].rotateLeft()
+        if key == 'd':
+            balls[curBall].rotateRight()
             
     if (key == CODED):
         if (keyCode == RIGHT) and curBall >= 0:
