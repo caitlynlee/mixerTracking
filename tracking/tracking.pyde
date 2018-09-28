@@ -130,7 +130,7 @@ def keyPressed():
             
     if (key == CODED):
         if (keyCode == RIGHT) and curBall >= 0:
-            balls[curBall].roateLeft()
+            balls[curBall].rotateLeft()
             
         if (keyCode == LEFT) and curBall >= 0:
             balls[curBall].rotateRight()
